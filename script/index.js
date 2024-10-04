@@ -44,7 +44,7 @@ const display =(posts) =>{
                       <p><i class="mr-2 fa-regular fa-eye"></i>${post.view_count}</p>
                       <p><i class="mr-2 fa-regular fa-clock"></i>${post.posted_time}Min</p>
                     </div>
-                    <p class="bg-green-400 cursor-pointer p-2 rounded-full w-10 h-10 flex justify-center items-center"><i class="fa-solid fa-envelope-open"></i></p>
+                    <p id="marksRead" onclick="markPost('${post.description}','${post.view_count}')" class="bg-green-400 cursor-pointer p-2 rounded-full w-10 h-10 flex justify-center items-center"><i class="fa-solid fa-envelope-open"></i></p>
                   </div>
                 </div>
               </div>
@@ -53,6 +53,25 @@ const display =(posts) =>{
     });
 }
 
+const markPost = (title , views) => {
+  const marksReadSection = document.getElementById('markAsReadContainer')
+
+  const div = document.createElement('div')
+  div.innerHTML = `
+                 <div class="flex items-center bg-white p-2 rounded-3xl">
+                    <p>${title}</p>
+                    <p class="ml-2 flex items-center"><i class="mr-2 fa-regular fa-eye"></i>${views}</p>
+                  </div>
+  `
+  marksReadSection.appendChild(div);
+
+
+  const marksValue = document.getElementById('markAsReadCounter').innerText;
+  const newMarksValue = parseFloat(marksValue);
+  const countMarksValue = newMarksValue + 1 ;
+
+  document.getElementById('markAsReadCounter').innerText = countMarksValue;
+}
 
 
 
